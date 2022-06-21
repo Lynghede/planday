@@ -1,13 +1,14 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import { Stack, NewBox } from "../ui/EveryLayout";
-import Carousel from "../components/Carousel";
-import Genres from "../lib/Genres";
 import { useState } from "react";
-import GenreInfo from "../components/GenreInfo";
+import Head from "next/head";
+// Data
+import Data from "../lib/planday";
+// Components
+import { Stack, NewBox, Grid } from "../ui/EveryLayout";
+import Mollen from "../components/Tiles";
 
 const Home: NextPage = () => {
-  const [type, setType] = useState("movie");
+  const [data, setData] = useState(Data);
   return (
     <>
       <Head>
@@ -16,11 +17,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Stack>
-        {Genres.map((genre: string) => (
-          <GenreInfo genre={genre} type={type} setType={setType} key={genre}>
-            <Carousel genre={genre} type={type} />
-          </GenreInfo>
-        ))}
+        <Mollen />
       </Stack>
     </>
   );

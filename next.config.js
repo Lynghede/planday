@@ -5,7 +5,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ["prod.cdn.bbaws.net", "s3-eu-west-1.amazonaws.com"],
+    domains: ["images.unsplash.com"],
   },
 };
 

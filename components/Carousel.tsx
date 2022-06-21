@@ -12,27 +12,25 @@ import "swiper/css/pagination";
 /** SWR */
 import fetcher from "../lib/Fetcher";
 import useSWR from "swr";
-interface Props {
-  genre: string;
-  type: string;
-}
+interface Props {}
 
-const Carousel: React.FC<Props> = (props) => {
+const Carousel: React.FC<Props> = () => {
   const isMobile = useMedia<boolean>(["(max-width: 768px)"], [true], false);
   const isTablet = useMedia<boolean>(["(max-width: 1000px)"], [true], false);
-  const genre = props.genre;
-  const type = props.type;
+  // const genre = props.genre;
+  // const type = props.type;
 
   /** Fetch movies/series by category, based on user selection */
-  const { data, error } = useSWR<any>(
-    `https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas?form=json&range=1-10&byTags=genre:${genre}&byProgramType=${type}`,
-    fetcher
-  );
+  const { data, error } = useSWR<any>(`/data/planday.json`, fetcher);
+  // const { data, error } = useSWR<any>(
+  //   `https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas?form=json&range=1-10&byTags=genre:${genre}&byProgramType=${type}`,
+  //   fetcher
+  // );
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading..</div>;
 
-  const entries = data.entries;
+  const entries = data;
 
   /** Used to make the imported swiper library responsive */
   function slidesPerView() {
@@ -40,6 +38,8 @@ const Carousel: React.FC<Props> = (props) => {
     if (isTablet) return 4;
     return 5;
   }
+
+  console.log(data);
 
   return (
     <NewBox padding="0">
@@ -51,7 +51,7 @@ const Carousel: React.FC<Props> = (props) => {
         pagination={true}
       >
         {entries.map((entry: any) => (
-          <SwiperSlide key={entry.title}>
+          <SwiperSlide key={entry.imagePath}>
             <Card data={entry} />
           </SwiperSlide>
         ))}

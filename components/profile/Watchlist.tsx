@@ -7,6 +7,8 @@ const Watchlist: React.FC = () => {
   const list = watchlist.watchlist || [];
   const count = list.length;
 
+  console.log(watchlist);
+
   return (
     <NoPaddingMobileNewBox>
       <Stack>
@@ -19,7 +21,7 @@ const Watchlist: React.FC = () => {
         ) : (
           <Grid minimum="20ch" gap="var(--s3)">
             {list.map((entry: any) => (
-              <div key={entry.id}>
+              <div style={{ height: "300px", width: "300px" }} key={entry.id}>
                 <Card data={entry} />
               </div>
             ))}

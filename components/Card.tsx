@@ -20,84 +20,49 @@ const Card: React.FC<Props> = (props) => {
   const watchlist = useWatchlist();
   const { data } = props;
   const title = data.title;
-  const description =
-    data.description === ""
-      ? data.plprogram$descriptionLocalized.da
-      : data.description;
-  const thumb =
-    data.plprogram$thumbnails["orig-396x272"]?.plprogram$url ||
-    data.plprogram$thumbnails["orig-364x250"]?.plprogram$url ||
-    data.plprogram$thumbnails["orig-594x408"]?.plprogram$url ||
-    data.plprogram$thumbnails["orig-3000x2000"]?.plprogram$url ||
-    "/images/molle.jpeg";
-  const releaseYear = data.plprogram$year;
-  const type = data.plprogram$programType;
-  const genres = data.plprogram$tags
-    .filter((item: any) => item.plprogram$scheme === "genre")
-    .map((item: any) => item.plprogram$title);
-  const id = getItemID(data.id);
+  const description = data.description || "no description";
+  const thumb = data.imagePath || "/images/molle.jpeg";
 
-  /** Adds movies to your watchlist */
+  console.log("card data", data);
+
+  /** Adds item to your watchlist */
   function handleClickAdd(e: React.MouseEvent) {
     e.stopPropagation();
     e.preventDefault();
     watchlist.addToList(data);
   }
-  /** Removes movies from your watchlist */
+  /** Removes item from your watchlist */
   function handleClickRemove(e: React.MouseEvent) {
     e.stopPropagation();
     e.preventDefault();
     watchlist.removeFromList(data);
   }
 
-  /** Check if movies or series are active, to highlight the correct buttton */
+  /** Check if item or series are active, to highlight the correct buttton */
   function isActive() {
     return watchlist.watchlist.some((element) => element.id === data.id);
   }
 
   return (
     <Container className="container" padding="0">
-      <Stack space="var(--s-4)" backgroundColor="var(--color-dark-purple)">
-        <Link href={`/film/${id}`} passHref>
-          <NewBox padding="0" as="a" style={{ position: "relative" }}>
-            <Image
-              src={thumb}
-              alt="molle"
-              layout="responsive"
-              objectFit="cover"
-              width={67}
-              height={100}
-            />
-            <Overlay>
-              <OverlayInfo>
-                <span style={{ height: "100%" }}>
-                  <OverlayDescription>{description}</OverlayDescription>
-                </span>
-                <OverlayAction>
-                  <OverlayActionItem
-                    onClick={handleClickAdd}
-                    active={isActive()}
-                  >
-                    <AddCircle size={30} />
-                  </OverlayActionItem>
-                  <OverlayActionItem onClick={handleClickRemove}>
-                    <RemoveCircle size={30} />
-                  </OverlayActionItem>
-                </OverlayAction>
-              </OverlayInfo>
-            </Overlay>
-          </NewBox>
-        </Link>
-        <NewBox padding="var(--s0)">
-          <H4>{title}</H4>
-          <Paragraph>
-            {releaseYear}, {capitalizeFirstLetter(type)} -{" "}
-            {genres.length === 1
-              ? genres
-              : genres.map((genre: any) => genre + ", ")}
-          </Paragraph>
-        </NewBox>
-      </Stack>
+      {/* <Link href={`/film/${id}`} passHref> */}
+      <Image src={thumb} alt={description} layout="fill" objectFit="cover" />
+      <Overlay>
+        <OverlayInfo>
+          <span style={{ height: "100%" }}>
+            <OverlayDescription>{description}</OverlayDescription>
+          </span>
+          <OverlayAction>
+            <OverlayActionItem onClick={handleClickAdd} active={isActive()}>
+              <AddCircle size={30} />
+            </OverlayActionItem>
+            <OverlayActionItem onClick={handleClickRemove}>
+              <RemoveCircle size={30} />
+            </OverlayActionItem>
+          </OverlayAction>
+        </OverlayInfo>
+      </Overlay>
+      {/* </Link> */}
     </Container>
   );
 };
@@ -127,8 +92,8 @@ const OverlayInfo = styled.div`
 
 const OverlayDescription = styled.div`
   bottom: 0;
-  color: #cfdce7;
-  font-size: 0.85rem;
+  color: var(--color-green);
+  font-size: 1.5rem;
   padding: 0 1rem;
   position: absolute;
   margin: 1rem 0;
@@ -178,7 +143,7 @@ export const Paragraph = styled.p`
 const Container = styled(NewBox)`
   height: 100%;
   width: 100%;
-  border-radius: 6px;
+  /* border-radius: 6px; */
   /* background: var(--color-green); */
   overflow: hidden;
   position: relative;

@@ -17,27 +17,13 @@ const Film: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data, error } = useSWR<any>(
-    `https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas/${id}?form=json`,
-    fetcher
-  );
+  const { data, error } = useSWR<any>(`/data/planday.json`, fetcher);
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading..</div>;
-  const src =
-    data.plprogram$thumbnails["orig-1080x1920"]?.plprogram$url ||
-    "/images/molle.jpeg";
+  const src = data.imagePath || "/images/molle.jpeg";
   const title = data.title;
-  const description =
-    data.description === ""
-      ? data.plprogram$descriptionLocalized.da
-      : data.description;
-  const releaseYear = data.plprogram$year;
-  const type = data.plprogram$programType;
-  const genres = data.plprogram$tags
-    .filter((item: any) => item.plprogram$scheme === "genre")
-    .map((item: any) => item.plprogram$title);
-  const credits = data.plprogram$credits;
+  const description = data.description || "no description";
 
   return (
     <>
