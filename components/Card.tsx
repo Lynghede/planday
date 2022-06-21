@@ -8,15 +8,12 @@ import { RemoveCircle, AddCircle } from "@styled-icons/ionicons-outline/";
 interface Props {
   data: any;
 }
-/** The Card component recieves data on a single movie/series */
+/** The Card component recieves data on a single object */
 const Card: React.FC<Props> = (props) => {
   const watchlist = useWatchlist();
   const { data } = props;
-  const title = data.title;
   const description = data.description || "no description";
   const thumb = data.imagePath || "/images/molle.jpeg";
-
-  // console.log("card data", data);
 
   /** Adds item to your watchlist */
   function handleClickAdd(e: React.MouseEvent) {
@@ -31,7 +28,8 @@ const Card: React.FC<Props> = (props) => {
     watchlist.removeFromList(data);
   }
 
-  /** Check if item or series are active, to highlight the correct buttton */
+  /** Check if object are currently in your watchlist,
+   * to highlight the plus buttton on the tile overlay */
   function isActive() {
     return watchlist.watchlist.some((element) => element.id === data.id);
   }
@@ -85,7 +83,7 @@ const OverlayInfo = styled.div`
 
 const OverlayDescription = styled.div`
   bottom: 0;
-  color: var(--color-green);
+  color: var(--color-light-green);
   font-size: 1.5rem;
   padding: 0 1rem;
   position: absolute;

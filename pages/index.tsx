@@ -16,16 +16,14 @@ const Home: NextPage = () => {
         <meta name="description" content="Created by Morten Lynghede" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Stack>
-        <NewBox padding="var(--s0)">
-          <h1>Image gallery</h1>
-          <h2>
-            Add or remove pictures to your personal gallery by hovering, or drag
-            to rearrange the order.
-          </h2>
-        </NewBox>
-        <Gallery />
-      </Stack>
+      <NewBox padding="var(--s0)">
+        <h1>IMAGE GALLERY</h1>
+        <h2>
+          Add or remove pictures to your personal gallery by hovering, or drag
+          to rearrange the order.
+        </h2>
+      </NewBox>
+      <Gallery />
     </>
   );
 };

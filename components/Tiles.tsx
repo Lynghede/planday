@@ -1,13 +1,14 @@
 import "../node_modules/react-tiles-dnd/esm/index.css";
 import type { RenderTileFunction } from "../lib/react-tiles-dnd/types/index";
 import { TilesContainer } from "../lib/react-tiles-dnd/index";
-import Image from "next/image";
 import { useState } from "react";
+import styled from "styled-components";
 // Data
 import Data from "../lib/planday";
 // Components
 import Card from "./Card";
-import { title } from "process";
+import { Stack, NewBox } from "../ui/EveryLayout";
+import Input from "./Input";
 
 let int = 0;
 function generateId(i: number) {
@@ -25,9 +26,8 @@ const tiles = Data.map((item) => ({
   ...item,
 }));
 
+/** Single tile component */
 const render: RenderTileFunction<typeof tiles[0]> = ({ data, isDragging }) => {
-  //   console.log("tile data", data);
-
   return (
     <div style={{ padding: "var(--s0)", width: "100%" }}>
       <div
@@ -35,13 +35,6 @@ const render: RenderTileFunction<typeof tiles[0]> = ({ data, isDragging }) => {
         style={{ width: "100%", height: "100%" }}
       >
         <Card data={data} />
-        {/* <Image
-          src={data.imagePath}
-          alt={data.description}
-          layout="fill"
-          objectFit="cover"
-          style={{ pointerEvents: "none" }}
-        /> */}
       </div>
     </div>
   );
@@ -53,8 +46,14 @@ const tileSize = (tile: typeof tiles[0]) => ({
 });
 
 function Gallery() {
+  /** Set the query string for the search input field
+   * Type: String
+   */
   const [query, setQuery] = useState("");
 
+  /** Filters the tiles based on the query
+   * Return a list of objects
+   */
   const filteredTiles =
     query.length === 0
       ? tiles
@@ -65,13 +64,16 @@ function Gallery() {
   return (
     <div className="tiles">
       <form>
-        <label>Search</label>
-        <input
-          id="search"
-          type="text"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-        />
+        <NewBox padding="var(--s0)">
+          <Input
+            id="search"
+            type="text"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search..."
+            style={{ padding: "var(--s-2)" }}
+          />
+        </NewBox>
       </form>
       <TilesContainer
         data={filteredTiles}
