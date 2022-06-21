@@ -47,7 +47,6 @@ export const WatchlistProvider: React.FC<any> = ({ children }) => {
     if (!text) return;
     try {
       const list = JSON.parse(text);
-      console.log("list: ", list);
       if (Array.isArray(list)) setWatchlist(list);
     } catch (error) {
       console.error(error);

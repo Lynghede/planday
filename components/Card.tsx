@@ -12,8 +12,11 @@ interface Props {
 const Card: React.FC<Props> = (props) => {
   const watchlist = useWatchlist();
   const { data } = props;
+  console.log(data);
   const description = data.description || "no description";
   const thumb = data.imagePath || "/images/molle.jpeg";
+  const id = data.id;
+  console.log(id);
 
   /** Adds item to your watchlist */
   function handleClickAdd(e: React.MouseEvent) {
@@ -36,12 +39,15 @@ const Card: React.FC<Props> = (props) => {
 
   return (
     <Container className="container" padding="0">
-      {/* <Link href={`/film/${id}`} passHref> */}
       <Image src={thumb} alt={description} layout="fill" objectFit="cover" />
       <Overlay>
         <OverlayInfo>
           <span style={{ height: "100%" }}>
-            <OverlayDescription>{description}</OverlayDescription>
+            <Link href={`/image/${id}`} passHref>
+              <a>
+                <OverlayDescription>{description}</OverlayDescription>
+              </a>
+            </Link>
           </span>
           <OverlayAction>
             <OverlayActionItem onClick={handleClickAdd} active={isActive()}>
@@ -53,7 +59,6 @@ const Card: React.FC<Props> = (props) => {
           </OverlayAction>
         </OverlayInfo>
       </Overlay>
-      {/* </Link> */}
     </Container>
   );
 };

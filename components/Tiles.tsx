@@ -28,6 +28,7 @@ const tiles = Data.map((item) => ({
 
 /** Single tile component */
 const render: RenderTileFunction<typeof tiles[0]> = ({ data, isDragging }) => {
+  console.log("render data: ", data);
   return (
     <div style={{ padding: "var(--s0)", width: "100%" }}>
       <div
