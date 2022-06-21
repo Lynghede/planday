@@ -52,13 +52,15 @@ const tileSize = (tile: typeof tiles[0]) => ({
   rowSpan: tile.rows,
 });
 
-function Mollen() {
+function Gallery() {
   const [query, setQuery] = useState("");
 
   const filteredTiles =
     query.length === 0
       ? tiles
-      : tiles.filter((tile) => tile.title.includes(query));
+      : tiles.filter((tile) =>
+          tile.title.toLowerCase().includes(query.toLowerCase())
+        );
 
   return (
     <div className="tiles">
@@ -82,4 +84,4 @@ function Mollen() {
   );
 }
 
-export default Mollen;
+export default Gallery;

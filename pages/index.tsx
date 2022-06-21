@@ -5,7 +5,7 @@ import Head from "next/head";
 import Data from "../lib/planday";
 // Components
 import { Stack, NewBox, Grid } from "../ui/EveryLayout";
-import Mollen from "../components/Tiles";
+import Gallery from "../components/Tiles";
 
 const Home: NextPage = () => {
   const [data, setData] = useState(Data);
@@ -24,7 +24,7 @@ const Home: NextPage = () => {
             to rearrange the order.
           </h2>
         </NewBox>
-        <Mollen />
+        <Gallery />
       </Stack>
     </>
   );
