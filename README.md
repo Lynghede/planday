@@ -1,8 +1,6 @@
-## Blockbuster Assignment
+## Planday Assignment
 
 Created by: Morten Lynghede, 2022
-
-The page can be found: https://blockbuster-black.vercel.app/
 
 ## Getting Started
 
