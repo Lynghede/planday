@@ -2,10 +2,12 @@ import "../node_modules/react-tiles-dnd/esm/index.css";
 import type { RenderTileFunction } from "../lib/react-tiles-dnd/types/index";
 import { TilesContainer } from "../lib/react-tiles-dnd/index";
 import Image from "next/image";
+import { useState } from "react";
 // Data
 import Data from "../lib/planday";
 // Components
 import Card from "./Card";
+import { title } from "process";
 
 let int = 0;
 function generateId(i: number) {
@@ -27,7 +29,7 @@ const render: RenderTileFunction<typeof tiles[0]> = ({ data, isDragging }) => {
   //   console.log("tile data", data);
 
   return (
-    <div style={{ padding: "1rem", width: "100%" }}>
+    <div style={{ padding: "var(--s0)", width: "100%" }}>
       <div
         className={`tile ${isDragging ? "dragging" : ""}`}
         style={{ width: "100%", height: "100%" }}
@@ -51,10 +53,26 @@ const tileSize = (tile: typeof tiles[0]) => ({
 });
 
 function Mollen() {
+  const [query, setQuery] = useState("");
+
+  const filteredTiles =
+    query.length === 0
+      ? tiles
+      : tiles.filter((tile) => tile.title.includes(query));
+
   return (
     <div className="tiles">
+      <form>
+        <label>Search</label>
+        <input
+          id="search"
+          type="text"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+        />
+      </form>
       <TilesContainer
-        data={tiles}
+        data={filteredTiles}
         renderTile={render}
         tileSize={tileSize}
         forceTileWidth={300}

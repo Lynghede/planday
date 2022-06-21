@@ -17,6 +17,13 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Stack>
+        <NewBox padding="var(--s0)">
+          <h1>Image gallery</h1>
+          <h2>
+            Add or remove pictures to your personal gallery by hovering, or drag
+            to rearrange the order.
+          </h2>
+        </NewBox>
         <Mollen />
       </Stack>
     </>

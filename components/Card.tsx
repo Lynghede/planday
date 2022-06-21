@@ -2,15 +2,8 @@ import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
 import { Stack, NewBox, ELEVATIONS } from "../ui/EveryLayout";
-import capitalizeFirstLetter from "../lib/CapitalizeFirstLetter";
 import { useWatchlist } from "../utlities/WatchlistContext";
 import { RemoveCircle, AddCircle } from "@styled-icons/ionicons-outline/";
-
-function getItemID(string: string) {
-  const tempArray = string.split("/");
-  const id = tempArray[tempArray.length - 1];
-  return id;
-}
 
 interface Props {
   data: any;
@@ -23,7 +16,7 @@ const Card: React.FC<Props> = (props) => {
   const description = data.description || "no description";
   const thumb = data.imagePath || "/images/molle.jpeg";
 
-  console.log("card data", data);
+  // console.log("card data", data);
 
   /** Adds item to your watchlist */
   function handleClickAdd(e: React.MouseEvent) {
