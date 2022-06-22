@@ -11,7 +11,7 @@ const Input = styled.input`
   /* margin: 1.8em 0; */
   font-weight: 900;
   letter-spacing: 0.2ch;
-
+  min-width: 310px;
   ::placeholder {
     text-transform: uppercase;
     color: inherit;

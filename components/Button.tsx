@@ -9,16 +9,18 @@ const Button = styled.button<ButtonProps>`
   font-size: 1em;
   font-weight: thin;
   border: 1px solid var(--color-light-green);
-  padding: 0.2rem 1rem;
+  border-radius: 1rem;
+  padding: 0.7rem 1rem;
   color: ${(p) =>
     p.active ? "var(--color-light-purple)" : "var(--color-light-green)"};
   background-color: ${(p) =>
-    p.active ? "var(--color-light-green)" : "var(--color-purple)"};
+    p.active ? "var(--color-light-green)" : "transparent"};
 
-  transition: 0.5s;
+  transition: transform 0.2s;
   :hover {
-    color: var(--color-light-green);
-    background: var(--color-light-purple);
+    transform: scale(1.01);
+    color: var(--color-light-purple);
+    background: var(--color-light-green);
   }
 `;
 

@@ -7,8 +7,6 @@ const Watchlist: React.FC = () => {
   const list = watchlist.watchlist || [];
   const count = list.length;
 
-  console.log(watchlist);
-
   return (
     <NoPaddingMobileNewBox>
       <Stack>

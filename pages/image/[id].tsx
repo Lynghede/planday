@@ -12,7 +12,6 @@ import Data from "../../lib/planday";
 const Image: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
-  console.log(id);
   const tempId = parseInt(id) - 1;
   const data = Data[tempId];
 

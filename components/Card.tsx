@@ -12,11 +12,9 @@ interface Props {
 const Card: React.FC<Props> = (props) => {
   const watchlist = useWatchlist();
   const { data } = props;
-  console.log(data);
   const description = data.description || "no description";
   const thumb = data.imagePath || "/images/molle.jpeg";
   const id = data.id;
-  console.log(id);
 
   /** Adds item to your watchlist */
   function handleClickAdd(e: React.MouseEvent) {
