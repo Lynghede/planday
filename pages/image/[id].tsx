@@ -15,8 +15,10 @@ const Image: React.FC = () => {
   const tempId = parseInt(id as any) - 1;
   const data = Data[tempId];
 
+  if (!data) return <p>loading..</p>;
+
   const src = data.imagePath || "/images/molle.jpeg";
-  const title = data.title;
+  const title = data.title || "no title";
   const description = data.description || "no description";
 
   return (
