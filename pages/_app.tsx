@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 
 import type { AppProps } from "next/app";
 import React from "react";
-import { ToastProvider } from "../utlities/toast";
 import Layout from "../ui/Layout";
 import { WatchlistProvider } from "../utlities/WatchlistContext";
 
@@ -12,9 +11,7 @@ function getDefaultLayout(page: React.ReactElement) {
   return (
     <>
       <WatchlistProvider>
-        <ToastProvider>
-          <Layout>{page}</Layout>
-        </ToastProvider>
+        <Layout>{page}</Layout>
       </WatchlistProvider>
     </>
   );

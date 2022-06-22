@@ -2,12 +2,13 @@ import "../node_modules/react-tiles-dnd/esm/index.css";
 import type { RenderTileFunction } from "../lib/react-tiles-dnd/types/index";
 import { TilesContainer } from "../lib/react-tiles-dnd/index";
 import { useState } from "react";
-import styled from "styled-components";
+import confetti from "canvas-confetti";
+
 // Data
 import Data from "../lib/planday";
 // Components
 import Card from "./Card";
-import { Stack, NewBox, Switcher } from "../ui/EveryLayout";
+import { Stack, NewBox, Switcher, Center } from "../ui/EveryLayout";
 import Input from "./Input";
 import Button from "./Button";
 import { Paragraph } from "./Paragraph";
@@ -76,6 +77,7 @@ function Gallery() {
     };
 
     setTiles([newTile, ...tiles]);
+    confetti();
   }
 
   /** Filters the tiles based on the query, by matching query with title or description
@@ -149,13 +151,19 @@ function Gallery() {
           </Stack>
         </NewBox>
       </form>
-      <TilesContainer
-        data={filteredTiles}
-        renderTile={render}
-        tileSize={tileSize}
-        forceTileWidth={300}
-        forceTileHeight={300}
-      ></TilesContainer>
+      {filteredTiles.length === 0 ? (
+        <Center>
+          <h3>NO RESULTS FOUND!</h3>
+        </Center>
+      ) : (
+        <TilesContainer
+          data={filteredTiles}
+          renderTile={render}
+          tileSize={tileSize}
+          forceTileWidth={300}
+          forceTileHeight={300}
+        ></TilesContainer>
+      )}
     </Stack>
   );
 }
