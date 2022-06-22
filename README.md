@@ -2,6 +2,8 @@
 
 Created by: Morten Lynghede, 2022
 
+The page can be found at: https://planday-lyart.vercel.app/
+
 ## Getting Started
 
 First, run the development server:
