@@ -12,7 +12,7 @@ import Data from "../../lib/planday";
 const Image: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
-  const tempId = parseInt(id) - 1;
+  const tempId = parseInt(id as any) - 1;
   const data = Data[tempId];
 
   const src = data.imagePath || "/images/molle.jpeg";
